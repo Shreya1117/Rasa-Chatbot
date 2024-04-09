@@ -1,0 +1,36 @@
+version: "3.1"
+
+rules:
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+- rule: Dispatch llm when asked a question
+  steps:
+  - intent: question_disease
+  - action: action_llm
+
+- rule: Activate Detail Form
+  steps:
+  - intent: do_i_have_disease
+  - action: utter_request_info
+  - intent: affirm
+  - action: simple_detail_form
+  - active_loop: simple_detail_form
+
+- rule: Submit Detail Form
+  condition:
+  - active_loop: simple_detail_form
+  steps:
+  - action: simple_detail_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_llm

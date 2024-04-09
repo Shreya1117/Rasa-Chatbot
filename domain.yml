@@ -1,0 +1,103 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - question_disease
+  - do_i_have_disease
+  - announce_symptom
+  - announce_gender
+  - announce_age
+  - announce_location
+
+responses:
+  utter_greet:
+  - text: "Hey! How are you?"
+
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_happy:
+  - text: "Great, carry on!"
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+
+  utter_suicide_help:
+  - text: "Please do not have negative thoughts, and seek help. This is the suicide helpline: +91 9152987821."
+
+  utter_request_gender:
+  - text: "What is your gender?"
+
+  utter_request_age:
+  - text: "What is your age?"
+
+  utter_request_location:
+  - text: "What is your location?"
+
+  utter_request_symptom:
+  - text: "What are your symptoms?"
+
+  utter_request_info:
+  - text: "Are you willing to give your details like gender, age, etc?"
+
+actions:
+  - action_llm
+  - validate_simple_detail_form
+
+entities:
+  - age
+  - gender
+  - location
+  - disease
+  - symptom
+
+slots:
+  age:
+    type: float
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: age
+  location:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: location
+  gender:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: gender
+  symptoms:
+    type: list
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: symptom
+
+forms:
+  simple_detail_form:
+    required_slots:
+      - gender
+      - age
+      - location
+      - symptoms
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

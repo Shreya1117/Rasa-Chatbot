@@ -1,0 +1,51 @@
+version: "3.1"
+
+stories:
+
+- story: greet path
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- story: farewell path
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- story: sad path 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+
+- story: sad path 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_goodbye
+
+- story: generic path 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: question_disease
+  - action: action_llm
+
+- story: generic path 2
+  steps:
+    - intent: do_i_have_disease
+    - action: utter_request_gender
+    - intent: announce_gender
+    - action: utter_request_location
+    - intent: announce_location
+    - action: utter_request_symptom
+    - intent: announce_symptom
+    - action: action_llm

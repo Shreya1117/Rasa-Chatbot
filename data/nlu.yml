@@ -1,0 +1,156 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+
+- intent: mood_great
+  examples: |
+    - perfect
+    - great
+    - amazing
+    - feeling like a king
+    - wonderful
+    - I am feeling very good
+    - I am great
+    - I am amazing
+    - I am going to save the world
+    - super stoked
+    - extremely good
+    - so so perfect
+    - so good
+    - so perfect
+
+- intent: mood_unhappy
+  examples: |
+    - my day was horrible
+    - I am sad
+    - I don't feel very well
+    - I am disappointed
+    - super sad
+    - I'm so sad
+    - sad
+    - very sad
+    - unhappy
+    - not good
+    - not very good
+    - extremely sad
+    - so saad
+    - so sad
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+
+- intent: question_disease
+  examples: |
+    - what is this disease?
+    - what is [chicken pox](disease)?
+    - what is [tumor](disease)?
+
+- intent: do_i_have_disease
+  examples: |
+    - do i have [breast cancer](disease)?
+    - do i have [cancer](disease)?   
+    - do i have [tumor](disease)?
+    - how do i know if someone has (leukemia)?
+
+- intent: announce_symptom
+  examples: |
+    - i have [fever](symptom).
+
+- intent: announce_age
+  examples: |
+    - i am [20](age).
+    - i am [34](age) years old.
+    - i am turning [44](age) this year.
+    - i am [52](age).
+    - [42](age)
+- intent: announce_gender
+  examples: |
+    - i am a [woman](gender).
+    - i am [female](gender).
+    - i am [male](gender).
+    - i am [feminine](gender).
+- intent: announce_location
+  examples: |
+    - my address is [chennai, tamil nadu](location).
+    - i live in [arizona, us](location).
+    - i am staying at [mumbai](location) this year.
+    - i am from [hyderabad, india](location).
+    
+
+- lookup: disease
+  examples: |
+    - breast cancer
+    - cancer
+    - heart attack
+    - pox
+    - scurvy
+    - diabetes
+    - aids
+    - covid
+- lookup: symptom
+  examples: |
+    - cough
+    - lump in breast
+    - rapid weight loss
+    - bleeding gums
+    - no appetite
+    - blood pressure
+    - blood sugar
+    - brittle bones
+    - cold
+    - fever
+    - easy bruising
+    - migraine
+    - headache
+    - vomit
