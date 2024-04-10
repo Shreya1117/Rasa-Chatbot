@@ -106,6 +106,14 @@ nlu:
 - intent: announce_symptom
   examples: |
     - i have [fever](symptom).
+    - i have [cold](symptom) and [fever](symptom).
+    - i feel [headache](symptom) everyday.
+    - my symptoms are [cough](symptom) and [vomiting](symptom).
+    - i feel [pain in chest](symptom) and [weakness](symptom).
+    - i am [dizzy](symptom) and [tired](symptom) all the time.
+    - i have [no appetite](symptom) and [weight loss](symptom).
+    - my [gums bleed](symptom) and i can feel a [lump in my breast](symptom).
+    - i have [high blood pressure](symptom) and [blood sugar](symptom).
 
 - intent: announce_age
   examples: |

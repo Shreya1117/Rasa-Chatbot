@@ -48,4 +48,18 @@ class ValidateSimpleDetailForm(FormValidationAction):
         return "validate_simple_detail_form"
 
     def validate_gender(self, slot_value: Any, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict) -> Dict[Text, Any]:
+        gender = slot_value.lower().strip()
+        if 'female' in gender or 'girl' in gender or 'woman' in gender:
+            return {"gender": "female"}
+        elif 'male' in gender or 'boy' in gender or 'man' in gender:
+            return {"gender": "male"}
+        else:
+            dispatcher.utter_message(text=f'Please enter an appropriate gender.')
+            return {"gender": None}
 
+    def validate_age(self, slot_value: Any, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict) -> Dict[Text, Any]:
+        age = slot_value.lower().strip()
+        if not age.isdigit():
+            dispatcher.utter_message(text=f'Please enter a numeric value for age.')
+            return {"age": None}
+        return {"age": int(age)}

@@ -38,16 +38,16 @@ responses:
   utter_suicide_help:
   - text: "Please do not have negative thoughts, and seek help. This is the suicide helpline: +91 9152987821."
 
-  utter_request_gender:
+  utter_ask_gender:
   - text: "What is your gender?"
 
-  utter_request_age:
+  utter_ask_age:
   - text: "What is your age?"
 
-  utter_request_location:
+  utter_ask_location:
   - text: "What is your location?"
 
-  utter_request_symptom:
+  utter_ask_symptoms:
   - text: "What are your symptoms?"
 
   utter_request_info:

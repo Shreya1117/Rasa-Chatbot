@@ -20,8 +20,6 @@ rules:
 - rule: Activate Detail Form
   steps:
   - intent: do_i_have_disease
-  - action: utter_request_info
-  - intent: affirm
   - action: simple_detail_form
   - active_loop: simple_detail_form
 

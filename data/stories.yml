@@ -32,6 +32,7 @@ stories:
   - intent: deny
   - action: utter_goodbye
 
+
 - story: generic path 1
   steps:
   - intent: greet
@@ -39,13 +40,13 @@ stories:
   - intent: question_disease
   - action: action_llm
 
-- story: generic path 2
-  steps:
-    - intent: do_i_have_disease
-    - action: utter_request_gender
-    - intent: announce_gender
-    - action: utter_request_location
-    - intent: announce_location
-    - action: utter_request_symptom
-    - intent: announce_symptom
-    - action: action_llm
+#- story: generic path 2
+#  steps:
+#    - intent: do_i_have_disease
+#    - action: utter_request_gender
+#    - intent: announce_gender
+#    - action: utter_request_location
+#    - intent: announce_location
+#    - action: utter_request_symptom
+#    - intent: announce_symptom
+#    - action: action_llm
