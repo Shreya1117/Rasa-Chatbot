@@ -1,0 +1,14 @@
+[
+  {
+    "name": "disease",
+    "pattern": "(\\bbreast\\ cancer\\b|\\bcancer\\b|\\bheart\\ attack\\b|\\bpox\\b|\\bscurvy\\b|\\bdiabetes\\b|\\baids\\b|\\bcovid\\b)"
+  },
+  {
+    "name": "symptom",
+    "pattern": "(\\bcough\\b|\\blump\\ in\\ breast\\b|\\brapid\\ weight\\ loss\\b|\\bbleeding\\ gums\\b|\\bno\\ appetite\\b|\\bblood\\ pressure\\b|\\bblood\\ sugar\\b|\\bbrittle\\ bones\\b|\\bcold\\b|\\bfever\\b|\\beasy\\ bruising\\b|\\bmigraine\\b|\\bheadache\\b|\\bvomit\\b)"
+  },
+  {
+    "name": "location",
+    "pattern": "(\\bindia\\b|\\bchennai,\\ india\\b|\\bbangalore,\\ karnataka\\b|\\barizona,\\ us\\b|\\bbihar,\\ india\\b)"
+  }
+]

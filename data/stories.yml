@@ -35,8 +35,11 @@ stories:
 
 - story: generic path 1
   steps:
-  - intent: greet
+  - intent: announce_name
   - action: utter_greet
+
+- story: generic path 2
+  steps:
   - intent: question_disease
   - action: action_llm
 

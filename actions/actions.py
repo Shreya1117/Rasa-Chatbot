@@ -9,9 +9,12 @@
 
 from typing import Any, Text, Dict, List
 
+import aiohttp
+import asyncio
+
 from rasa_sdk import Action, Tracker, FormValidationAction
 from rasa_sdk.executor import CollectingDispatcher
-import requests
+from time import sleep
 
 HOST = "localhost"
 PORT = 8888
@@ -39,10 +42,12 @@ USER_ID = '12345'
 class action_llm(Action):
     def name(self) -> Text:
         return "action_llm"
-    def run(self, dispatcher: CollectingDispatcher,
+
+    async def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]):
         name = tracker.get_slot('name')
+        gender = tracker.get_slot('gender')
         age = tracker.get_slot('age')
         location = tracker.get_slot('location')
         symptom_iter = tracker.get_latest_entity_values("symptom")
@@ -50,13 +55,19 @@ class action_llm(Action):
         for symptom in symptom_iter:
             symptom_list.append(symptom)
         symptom_string = ", ".join(symptom_list)
-        USER_INFO = f'I am {name}, from {location}. I am {age} years old. My symptoms are: {symptom_string}.'
+        USER_INFO = f'I am {name}, from {location}. My gender is {gender}. I am {age} years old. My symptoms are: {symptom_string}.'
         # dispatcher.utter_message(text=f"Dispatching amazing llm to {name}, from {location} with {symptom_string}!!!")
-        res = requests.post(LLM_URL, json={'user_id': USER_ID, 'user_info': USER_INFO, 'message': 'How do I know if I have cancer?'}, timeout=120)
-        res = res.json()
+        async with aiohttp.ClientSession() as session:
+            async with session.post(LLM_URL, json={'user_id': USER_ID, 'user_info': USER_INFO,
+                                                   'message': 'How do I know if I have cancer?'}) as response:
+                res = await response.json()
+                code = response.status
+
         if res['status'] == 200:
+            print('LLM Response --->', res['response'])
             dispatcher.utter_message(text=res['response'])
         else:
+            print('Some error occurred, My bad...')
             dispatcher.utter_message(text="Some error occurred, My bad...")
         return []
 

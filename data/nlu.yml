@@ -115,6 +115,12 @@ nlu:
     - my [gums bleed](symptom) and i can feel a [lump in my breast](symptom).
     - i have [high blood pressure](symptom) and [blood sugar](symptom).
 
+- intent: announce_name
+  examples: |
+    - i am [ramya](name).
+    - my name is [sriram](name).
+    - hello, i am [lionel messi](name).
+    - hi, my name is [rahul david](name).
 - intent: announce_age
   examples: |
     - i am [20](age).
@@ -162,6 +168,14 @@ nlu:
     - migraine
     - headache
     - vomit
+    - fatigue
+- lookup: name
+  examples: |
+    - ramya
+    - gordon
+    - lionel messi
+    - rahul david
+    - joseph
 - lookup: location
   examples: |
     - india
