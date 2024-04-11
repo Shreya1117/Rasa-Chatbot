@@ -1,8 +1,8 @@
 import asyncio
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, Request
 from hypercorn.asyncio import serve
 from hypercorn.config import Config
-from starlette.responses import JSONResponse
+from starlette.responses import JSONResponse, FileResponse
 import aiohttp
 
 RASA_STATUS_URL = 'http://localhost:5005/webhooks/rest/'
@@ -18,10 +18,15 @@ app = FastAPI()
 async def root():
     return {"message": "Hello World"}
 
+@app.get("/home")
+async def root():
+    print("WELCOME, USER!!!")
+    return FileResponse("templates/test.html")
+
 @app.post("/predict")
 async def root(request: Request):
+    print()
     data = await request.json()
-
     user_id = data["user_id"]
     if user_id not in users.keys():
         users[user_id] = {'query': 0}
