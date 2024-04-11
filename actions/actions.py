@@ -11,6 +11,16 @@ from typing import Any, Text, Dict, List
 
 from rasa_sdk import Action, Tracker, FormValidationAction
 from rasa_sdk.executor import CollectingDispatcher
+import requests
+
+HOST = "localhost"
+PORT = 8888
+ENDPOINT = "message"
+
+LLM_URL = f"http://{HOST}:{PORT}/{ENDPOINT}"
+
+USER_ID = '12345'
+
 #
 #
 # class ActionHelloWorld(Action):
@@ -40,7 +50,14 @@ class action_llm(Action):
         for symptom in symptom_iter:
             symptom_list.append(symptom)
         symptom_string = ", ".join(symptom_list)
-        dispatcher.utter_message(text=f"Dispatching amazing llm to {name}, from {location} with {symptom_string}!!!")
+        USER_INFO = f'I am {name}, from {location}. I am {age} years old. My symptoms are: {symptom_string}.'
+        # dispatcher.utter_message(text=f"Dispatching amazing llm to {name}, from {location} with {symptom_string}!!!")
+        res = requests.post(LLM_URL, json={'user_id': USER_ID, 'user_info': USER_INFO, 'message': 'How do I know if I have cancer?'}, timeout=120)
+        res = res.json()
+        if res['status'] == 200:
+            dispatcher.utter_message(text=res['response'])
+        else:
+            dispatcher.utter_message(text="Some error occurred, My bad...")
         return []
 
 class ValidateSimpleDetailForm(FormValidationAction):

@@ -162,3 +162,10 @@ nlu:
     - migraine
     - headache
     - vomit
+- lookup: location
+  examples: |
+    - india
+    - chennai, india
+    - bangalore, karnataka
+    - arizona, us
+    - bihar, india
