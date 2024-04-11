@@ -57,13 +57,14 @@ class action_llm(Action):
         symptom_string = ", ".join(symptom_list)
         USER_INFO = f'I am {name}, from {location}. My gender is {gender}. I am {age} years old. My symptoms are: {symptom_string}.'
         # dispatcher.utter_message(text=f"Dispatching amazing llm to {name}, from {location} with {symptom_string}!!!")
+
         async with aiohttp.ClientSession() as session:
             async with session.post(LLM_URL, json={'user_id': USER_ID, 'user_info': USER_INFO,
                                                    'message': 'How do I know if I have cancer?'}) as response:
                 res = await response.json()
                 code = response.status
 
-        if res['status'] == 200:
+        if code == 200 and res['status'] == 200:
             print('LLM Response --->', res['response'])
             dispatcher.utter_message(text=res['response'])
         else:
