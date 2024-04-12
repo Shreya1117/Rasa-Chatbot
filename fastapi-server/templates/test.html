@@ -13,6 +13,7 @@
     .container {
         max-width: 500px;
         margin: 0 auto;
+        margin-top: 30px;
         padding: 20px;
         border: 1px solid #ccc;
         border-radius: 10px;
@@ -68,9 +69,16 @@
 
 <script>
     async function sendMessage() {
-        var inputElement = document.getElementById("input");
-        var message = inputElement.value.trim();
+        const inputElement = document.getElementById("input");
+        const message = inputElement.value.trim();
         if (message === "") return;
+
+        const messagesElement = document.getElementById("messages");
+        const messageElement = document.createElement("div");
+        messageElement.textContent = "You: " + message;
+        messageElement.classList.add("message");
+        messagesElement.appendChild(messageElement);
+        messagesElement.scrollTop = messagesElement.scrollHeight;
 
         const json_res = await fetch("/predict", {
             method: "POST",
@@ -80,17 +88,11 @@
 
         const res = json_res["text"]
 
-        var messagesElement = document.getElementById("messages");
-        var messageElement = document.createElement("div");
-        messageElement.textContent = "You: " + message;
-        messageElement.classList.add("message");
-        messagesElement.appendChild(messageElement);
-
         // Replace the following line with your chatbot logic
         // You can send the message to a server for processing or handle it locally
         // For simplicity, here we just echo back the same message
         setTimeout(function() {
-            var replyElement = document.createElement("div");
+            const replyElement = document.createElement("div");
             replyElement.textContent = "Chatbot: " + res; // Echo back the message
             replyElement.classList.add("message");
             messagesElement.appendChild(replyElement);
