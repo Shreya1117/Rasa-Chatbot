@@ -102,6 +102,7 @@ nlu:
     - do i have [cancer](disease)?   
     - do i have [tumor](disease)?
     - how do i know if someone has (leukemia)?
+    - how do i know if i have [cancer](disease)?
 
 - intent: announce_symptom
   examples: |

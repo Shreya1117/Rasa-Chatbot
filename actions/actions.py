@@ -22,8 +22,6 @@ ENDPOINT = "message"
 
 LLM_URL = f"http://{HOST}:{PORT}/{ENDPOINT}"
 
-USER_ID = '12345'
-
 #
 #
 # class ActionHelloWorld(Action):
@@ -46,6 +44,8 @@ class action_llm(Action):
     async def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]):
+        USER_ID = tracker.sender_id
+
         name = tracker.get_slot('name')
         gender = tracker.get_slot('gender')
         age = tracker.get_slot('age')
@@ -65,7 +65,7 @@ class action_llm(Action):
                 code = response.status
 
         if code == 200 and res['status'] == 200:
-            print('LLM Response --->', res['response'])
+            print(f'USER_ID ---> {USER_ID}. LLM Response --->', res['response'])
             dispatcher.utter_message(text=res['response'])
         else:
             print('Some error occurred, My bad...')
@@ -87,8 +87,10 @@ class ValidateSimpleDetailForm(FormValidationAction):
             return {"gender": None}
 
     def validate_age(self, slot_value: Any, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict) -> Dict[Text, Any]:
-        age = slot_value.lower().strip()
-        if not age.isdigit():
-            dispatcher.utter_message(text=f'Please enter a numeric value for age.')
-            return {"age": None}
+        age = slot_value
+        if type(slot_value) is str:
+            age = slot_value.lower().strip()
+            if not age.isdigit():
+                dispatcher.utter_message(text=f'Please enter a numeric value for age.')
+                return {"age": None}
         return {"age": int(age)}
