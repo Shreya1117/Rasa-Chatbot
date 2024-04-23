@@ -72,5 +72,6 @@ async def root(request: Request):
     return JSONResponse(content=response)
 
 app.mount("/res/Images", StaticFiles(directory="./res/Images"))
+app.mount("/templates", StaticFiles(directory="./templates"))
 
 asyncio.run(serve(app, config))
